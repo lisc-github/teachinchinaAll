@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Home | www.js.teachinginchina.org</title>
+    <link rel="stylesheet" media="screen and (min-device-width: 640px)" href="css/index.css">
+    <link rel="stylesheet" media="screen and (max-device-width: 640px)" href="css/index_mobile.css" />
+    <script src="js/jquery-1.7.2.min.js"></script>
+    <script src="js/home.js"></script>
+    <script src="js/placeholder.js"></script>
+    <script src="components/select_comp.js"></script>
+    <!--[if IE]>
+    <link rel="stylesheet" href="css/index.css">
+    <![endif]-->
+</head>
+<body>
+<div class="header item">
+    <div class="nav">
+        <div class="nav_box">
+            <div class="left">
+                <a href="http://www.teachinginchina.org">
+                    <div class="logo move"></div>
+                </a>
+            </div>
+            <div class="right">
+                <a href="javascript:;" class="active move">Home</a>
+                <a href="javascript:;" class="move">Programs</a>
+                <a href="javascript:;" class="move">Service</a>
+                <a href="javascript:;" class="move">About</a>
+                <a href="javascript:;" class="move">FAQ</a>
+                <a href="javascript:;" class="move">Contact</a>
+            </div>
+        </div>
+    </div>
+    <div class="banner">
+        <img src="img/timg.jpg" alt="banner">
+        <div class="cover"></div>
+    </div>
+    <div class="home">
+        <div class="home_box">
+            <h1 class="move">Welcome to</h1>
+            <h1 class="move teaching" style="color:#64990b;font-family: Book Antiqua">Teaching in China</h1>
+            <p class="move">Want to teach in China with good salary and security?Let us help you make your dream of teaching in China come true.</p>
+            <div class="login">
+                <div class="box">
+                    <a href="javascript:;" class="a1 move">Login</a>
+                    <a href="javascript:;" class="a2 move">Sign up</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="login_box">
+        <span class="close"></span>
+        <form action="" class="first_row" id="login_form">
+            <div class="row">
+                <div>
+                    <input type="text" name="l_username" placeholder="Name">
+                </div>
+                <span class="feedback"></span>
+            </div>
+            <div class="row">
+                <div>
+                    <input type="text" name="l_password" placeholder="Password">
+                </div>
+                <span class="feedback"></span>
+            </div>
+            <div class="row">
+                <div class="row_box">
+                    <input type="text" name="l_code" placeholder="Verification Code">
+                    <div class="code_img"></div>
+                </div>
+
+
+                <span class="feedback"></span>
+            </div>
+            <div class="row">
+                <div>
+                    <input type="submit" value="Login">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="sign_box">
+        <span class="close"></span>
+        <form action="" class="first_row" id="sign_form">
+            <div class="row">
+                <div>
+                    <input type="text" name="s_username" placeholder="Name">
+                </div>
+                <span class="feedback"></span>
+            </div>
+            <div class="row">
+                <div>
+                    <input type="text" name="s_email" placeholder="Email Address">
+                </div>
+                <span class="feedback"></span>
+            </div>
+            <div class="row">
+                <div class="row_box">
+                    <input type="text" name="s_code" placeholder="Verification Code">
+                    <div class="get_code">
+                        <input type="button" value="Get Verification Code" id="get_code">
+                    </div>
+                </div>
+                <span class="feedback"></span>
+            </div>
+            <div class="row">
+                <div>
+                    <input type="text" name="s_password" placeholder="Password">
+                </div>
+                <span class="feedback"></span>
+            </div>
+            <div class="row">
+                <div>
+                    <input type="text" name="s_password_again" placeholder="Password Again">
+                </div>
+                <span class="feedback"></span>
+            </div>
+            <div class="row">
+                <div>
+                    <input type="submit" value="submit">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="program item">
+    <div class="box">
+        <h1 class="move">Programs</h1>
+        <div class="all_programs">
+            <div class="each move">
+                <div class="img">
+                    <img src="img/english.jpg" alt="">
+                </div>
+                <div class="text">
+                    <h3>Teaching English</h3>
+                    <p>you have the opportunity to get a good job of teaching English in China</p>
+                </div>
+                <a class="detail" href="teach_English.html" target="_blank">
+                    <div class="detail_text">
+                        <p>Click to see more in</p>
+                        <p>Teaching English</p>
+                    </div>
+                </a>
+            </div>
+            <div class="each move">
+                <div class="img">
+                    <img src="img/arts.jpg" alt="">
+                </div>
+                <div class="text">
+                    <h3>Teaching Arts</h3>
+                    <p>Most schools require foreign teachers to teach oral English</p>
+                </div>
+                <a class="detail" href="teach_arts.html" target="_blank">
+                    <div class="detail_text">
+                        <p>Click to see more in</p>
+                        <p>Teaching Arts</p>
+                    </div>
+                </a>
+            </div>
+            <div class="each move">
+                <div class="img">
+                    <img src="img/science.jpg" alt="">
+                </div>
+                <div class="text">
+                    <h3>Teaching Science</h3>
+                    <p>some Chinese schools not only require foreign teachers</p>
+                </div>
+                <a class="detail" href="teach_science.html" target="_blank">
+                    <div class="detail_text">
+                        <p>Click to see more in</p>
+                        <p>Teaching Science</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="service item">
+    <div class="content">
+        <div class="box">
+            <h1 class="move">Visa Service</h1>
+            <a href="service1.html" target="_blank">
+                <div class="serv move">
+                    <h3>Chinese Law and Regulations</h3>
+                    <p>A Chinese visa is a permit issued by the Chinese visa authorities to an alien for entry into,exit from or transit through China.The Chinese visa authorities may issue a Diplomatic,Courtesy,Official or Regular Visa to an alien according to his/her status,purpose of visit to China or passport type.</p>
+                    <p class="last">more>></p>
+                </div>
+            </a>
+
+            <a href="service2.html" target="_blank">
+                <div class="serv move">
+                    <h3>Visa Applications</h3>
+                    <p>Employment Visa (Z Visa) is issued to an alien who comes to China for a post or employment,and his/her accompanying family members.Documents should be submitted for your application:Passport: Your valid passport must have at least six (6) months of remaining validity with at least one blank visa page in it.</p>
+                    <p class="last">more>></p>
+                </div>
+            </a>
+
+            <a href="service3.html" target="_blank">
+                <div class="serv move">
+                    <h3>Our Services and Fee</h3>
+                    <p>UCE will make sure that your employer will provide all of your papers for your visa application.If you apply for a tourist visa to come to China, UCE will make sure that your employer can arrange necessary paperwork and will have your visa upgraded to a work or business visa after you sign the contract.</p>
+                    <p class="last">more>></p>
+                </div>
+            </a>
+
+        </div>
+    </div>
+</div>
+<div class="about item">
+    <div class="content">
+        <div class="box">
+            <h1 class="move">About Us</h1>
+            <div class="img move">
+                <img src="img/about.jpg" alt="" width="100%">
+            </div>
+            <div class="text">
+                <p class="move">US-CHINA Education and Culture Exchange Center (UCE), is a non-political, non-religious, and non-profit organization committed to develop a needed symbiosis between China and USA separated by 10,000 miles. Our mission is to foster cross-cultural understanding between Chinese and Americans. The organization achieves this goal by providing hundreds of Americans teaching opportunities to work and live in China each year.</p>
+                <p class="move">&nbsp;</p>
+                <p class="move">As one of the first established organizations in America, we have extensive experience in arrange foreign teachers to schools and colleges throughout China. We really understand the needs and concerns of teachers coming to a foreign county to work and live. For the participants who have the sincere desire to come to China to teach while at the same time to learn about the richness and uniqueness of Chinese culture, UCE will provide comprehensive, professional services to ensure all participants work and live in China comfortable.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="FAQ item">
+    <div class="about_pic">
+        <img src="img/faq.jpg" alt="">
+        <div class="cover"></div>
+    </div>
+    <div class="content">
+        <div class="box">
+            <h1 class="move">Frequently Asked Questions</h1>
+            <div class="especial_box move">
+                <a href="faq1.html" target="_blank">
+                    <div class="each_faq">
+                        <h2>About teaching in China</h2>
+                        <p>1.What qualifications should one have to teach in China?</p>
+                        <p>2.What courses will I be required to teach?</p>
+                        <p>......</p>
+                        <p class="last">detail>></p>
+                    </div>
+                </a>
+
+            </div>
+            <div class="especial_box move">
+                <a href="faq2.html" target="_blank">
+                    <div class="each_faq">
+                        <h2>About visa</h2>
+                        <p>1.How to apply for a work-visa?</p>
+                        <p>2.Does UCE help teachers acquire work visas?</p>
+                        <p>......</p>
+                        <p class="last">detail>></p>
+                    </div>
+                </a>
+
+            </div>
+            <div class="especial_box move">
+                <a href="faq3.html" target="_blank">
+                    <div class="each_faq">
+                        <h2>About school</h2>
+                        <p>1.What are the apartments like in the school?</p>
+                        <p>2.Do teachers have a Chinese teaching assistant?</p>
+                        <p>......</p>
+                        <p class="last">detail>></p>
+                    </div>
+                </a>
+
+            </div>
+            <div class="especial_box move">
+                <a href="faq4.html" target="_blank">
+                    <div class="each_faq">
+                        <h2>About teaching program</h2>
+                        <p>1.What documents should I submit when I applies for a program?</p>
+                        <p>2.Do you have any winter teaching program this year?</p>
+                        <p>......</p>
+                        <p class="last">detail>></p>
+                    </div>
+                </a>
+
+            </div>
+            <div class="especial_box move">
+                <a href="faq5.html" target="_blank">
+                    <div class="each_faq">
+                        <h2>About our service</h2>
+                        <p>1.What kind of service does your organization provide for teachers?</p>
+                        <p>2.What kind of positions can you recommend?</p>
+                        <p>......</p>
+                        <p class="last">detail>></p>
+                    </div>
+                </a>
+
+            </div>
+            <div class="especial_box move">
+                <a href="faq6.html" target="_blank">
+                    <div class="each_faq">
+                        <h2></h2>
+                        <p></p>
+                        <p></p>
+                        <p>......</p>
+                        <p class="last">detail>></p>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="contact item">
+    <div class="content">
+        <div class="box">
+            <h1 class="move">Contact us</h1>
+            <div class="right">
+                <form action="" id="message_form">
+                    <div class="move ipt_box">
+                        <label for="name"><span class="red">*</span>FirstName</label><input type="text" name="name" id="name">
+                    </div>
+                    <div class="clear"></div>
+                    <div class="move ipt_box">
+                        <label for="lastname"><span class="red">*</span>LastName</label><input type="text" name="lastName" id="lastname">
+                    </div>
+                    <div class="clear"></div>
+                    <div class="move ipt_box">
+                        <label for="email"><span class="red">*</span>Email</label><input type="text" name="email" id="email">
+                    </div>
+                    <div class="clear"></div>
+                    <div class="move ipt_box">
+                        <label for="phone">Phone Number</label><input type="text" name="phone" id="phone">
+                    </div>
+                    <div class="clear"></div>
+                    <div class="move ipt_box">
+                        <label for="interest"><span class="red">*</span>Area of interest</label><input type="text" name="interest" id="interest">
+                    </div>
+                    <div class="clear"></div>
+                    <div class="move ipt_box">
+                        <label for="location"><span class="red">*</span>Your Current Location</label><div id="select"></div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="move ipt_box">
+                        <label for="message"><span class="red">*</span>Comments</label><textarea name="message" id="message" cols="30" rows="10"></textarea>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="move ipt_box">
+                        <input type="submit" value="SEND">
+                    </div>
+                    <p class="return_info">&nbsp;</p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <div class="box">
+        <p>© 2017 by www.js.teachinginchina.org</p>
+    </div>
+</div>
+<script>
+    var select = createSelect({h:'42',name:"location",readonly:"readonly",option:['United States','China','Others']});
+    document.getElementById('select').appendChild(select);
+</script>
+</body>
+</html>

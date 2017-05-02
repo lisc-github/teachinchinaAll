@@ -1,0 +1,281 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family:"Microsoft YaHei";
+}
+
+html {
+  font-size: 20px !important; }
+
+body {
+  background: #fff; }
+
+.header .nav {
+  height: 80px;
+  background: rgba(0, 0, 0, 0.7); }
+  .header .nav .nav_box {
+    width: 1096px;
+    margin: 0 auto;
+    overflow: hidden;
+    height: 100%; }
+    .header .nav .nav_box a {
+      overflow: hidden;
+      float: left;
+      width: 100%;
+      height: 100%; }
+    .header .nav .nav_box .left {
+      float: left;
+      width: 400px;
+      height: 100%; }
+      .header .nav .nav_box .left .logo {
+        height: 100%;
+        width: 100%;
+        background: url("../img/logo.png") 0 center no-repeat;
+        overflow: hidden; }
+@media \0screen\,screen\9 {
+  .header .nav {
+    background: #000;
+    filter: Alpha(opacity=60); } }
+
+.main {
+  width: 1096px;
+  margin: 60px auto 160px;
+  overflow: hidden; }
+  .main input[type='radio'] {
+    background: #fff; }
+  .main b {
+    color: #555;
+    font-size: 16px; }
+  .main .img {
+    width: 20%;
+    margin-right: 2%;
+    float: left;
+    border: 1px solid #ccc;
+    height: 180px; }
+    .main .img .photo {
+      height: 140px;
+      background: #aaa;
+      text-align: center; }
+      .main .img .photo span i {
+        font-size: 140px;
+        line-height: 140px;
+        color: #fff; }
+    .main .img .name {
+      text-align: center;
+      font-size:16px;
+      line-height: 40px; }
+  .main .form {
+    border: 1px solid #ddd;
+    width: 73%;
+    float: left;
+    padding: 1.5%;
+    overflow: hidden; }
+    .main .form .notice {
+      font-size: 24px;
+      margin-bottom: 20px; }
+    .main .form .title {
+      font-size: 13px;
+      margin-bottom: 4px; }
+    .main .form .box {
+      margin-bottom: 10px; }
+      .main .form .box input {
+        height: 26px;
+        outline: none;
+        background: #fff;
+        line-height: 26px\9; }
+      .main .form .box input[type='text'] {
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        -webkit-border-radius: 6px;
+        -moz-border-radius: 6px;
+        border-radius: 6px; }
+      .main .form .box .red {
+        width: 1%;
+        height: 42px;
+        line-height: 44px;
+        color: red; }
+      .main .form .box ._red {
+        line-height: 28px; }
+      .main .form .box p {
+        width: 100%;
+        height: 13px;
+        font-size: 12px;
+        line-height: 10px;
+        color: red; }
+      .main .form .box input, .main .form .box span, .main .form .box p {
+        float: left; }
+      .main .form .box .l_box {
+        float: left;
+        width: 46%;
+        overflow: hidden; }
+        .main .form .box .l_box input {
+          width: 87%; }
+      .main .form .box .r_box {
+        float: right;
+        width: 46%;
+        overflow: hidden; }
+        .main .form .box .r_box input {
+          width: 87%; }
+      .main .form .box .select {
+        width: 80%;
+        float: left;
+        border: 1px solid #ccc;
+        position: Relative; }
+        .main .form .box .select .select_ipt {
+          width: 100%;
+          padding-left: 0;
+          padding-right: 0;
+          text-indent: 12px;
+          border: 0;
+          -webkit-border-radius: 0 !important;
+          -moz-border-radius: 0 !important;
+          border-radius: 0 !important; }
+        .main .form .box .select li {
+          line-height: 24px;
+          cursor: pointer; }
+        .main .form .box .select li:hover {
+          background: #48a6cc !important;
+          color: #fff; }
+      .main .form .box .i_box, .main .form .box .j_box, .main .form .box .k_box {
+        float: left;
+        width: 33.333%; }
+        .main .form .box .i_box input, .main .form .box .j_box input, .main .form .box .k_box input {
+          width: 82%; }
+      .main .form .box ._box {
+        overflow: hidden; }
+        .main .form .box ._box .z_box {
+          overflow: hidden;
+          float: left;
+          width: 50%;
+          overflow: hidden; }
+          .main .form .box ._box .z_box input[type='radio'] {
+            margin-left: 0; }
+          .main .form .box ._box .z_box input[type='text'] {
+            height: 20px;
+            line-height: 20px;
+            width: 70%; }
+        .main .form .box ._box input[type='radio'] {
+          margin-left: 20px; }
+        .main .form .box ._box label {
+          margin-left: 6px;
+          font-size: 14px;
+          line-height: 26px;
+          color: #555; }
+        .main .form .box ._box span {
+          height: 24px; }
+      .main .form .box .box_ input {
+        width: 94%; }
+    .main .form .submit {
+      overflow: hidden;
+      margin-top: 30px; }
+      .main .form .submit input {
+        border: none;
+        float: right;
+        width: 140px;
+        height: 36px;
+        cursor: pointer;
+        background: #64990b;
+        color: #fff; }
+
+#li-radioComp-male,#li-radioComp-female,#li-radioComp-Associate,#li-radioComp-BA,#li-radioComp-BS,#li-radioComp-MS,#li-radioComp-MA,
+#li-radioComp-Doctor,#li-radioComp-Other,#li-radioComp-One_year,#li-radioComp-Two_semesters,#li-radioComp-One_semester,#li-radioComp-Half_year,
+#li-radioComp-Weeks,#li-radioComp-Flexible,#li-radioComp-middle_schools,#li-radioComp-colleges,#li-radioComp-elementary_schools,
+#li-radioComp-pre_schools,#li-radioComp-training_schools,#li-radioComp-all{
+  width:21px;
+  height:21px;
+  position:relative;
+  float: left;
+  display:table-cell;
+  vertical-align: middle;
+  overflow-y:hidden;
+}
+#li-radioComp-male,#li-radioComp-female{
+  margin-left:10px;
+}
+
+
+form .name{
+  float: left;
+  height: 21px !important;
+  line-height:21px;
+  font-size: 14px;
+  margin-left:4px;
+  color:#555;
+}
+input::-webkit-input-placeholder {
+  color: #aab2bd;
+  font-size: 12px;
+}
+.placeholder {
+  color: #aaa;
+  line-height: 26px; }
+
+.red_changed {
+  display: none;
+  line-height: 38px !important; }
+
+.footer {
+  height: 100px;
+  background: #eee; }
+  .footer .box {
+    margin: 0 auto;
+    width: 1096px;
+    line-height: 100px; }
+    .footer .box p {
+      text-align: center;
+      color: #999;
+      font-size: 14px; }
+
+.clear {
+  clear: both; }
+
+
+@media \0screen\,screen\9{
+  body{
+    min-width:1096px;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .main, .header .nav .nav_box, .footer .box {
+    width: 80%; } }
+@media screen and (max-width: 1000px) {
+  .main .form .box .i_box, .main .form .box .j_box, .main .form .box .k_box, .main .form .box .l_box, .main .form .box .r_box {
+    width: 100%; }
+
+  .main .form .box .box_ input, .main .form .box .r_box input, .main .form .box .l_box input {
+    width: 96%; }
+
+  .main .form .box .red {
+    width: 2%; }
+
+  .main .form .box .r_box {
+    float: left; }
+
+  .main .form .box ._box .z_box {
+    width: 80%; }
+
+  .main .form .box {
+    margin-bottom: 0; }
+
+  .main .form .box input[type='text'] {
+    padding-left: 0;
+    padding-right: 0;
+    text-indent: 12px; } }
+@media screen and (max-width: 700px) {
+  .main .form {
+    width: 97%; }
+
+  .main .img {
+    width: 100%;
+    margin-right: 0; }
+
+  .main {
+    padding: 0 10px; }
+
+  .header .nav .nav_box .left {
+    width: 100%; } }
+@media screen and (max-width: 700px) and (max-width: 400px) {
+  .header .nav .nav_box .left .logo {
+    background-size: 100%; } }
+

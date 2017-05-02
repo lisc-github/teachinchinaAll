@@ -1,0 +1,167 @@
+*{
+    margin:0;
+    padding:0;
+    font-family:"Microsoft YaHei";
+}
+html {
+    font-size: 20px }
+
+html, body {
+    height: 100%; }
+
+body {
+    background: #f9f9f9; }
+
+@media \0screen\,screen\9 {
+    .nav {
+        background: #000;
+        filter: Alpha(Opacity=70); } }
+.nav {
+    z-index: 99999;
+    /*position: fixed;*/
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 80px;
+    background: rgba(0, 0, 0, 0.7); }
+.nav .nav_box {
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    height: 100%; }
+.nav .nav_box a {
+    overflow: hidden;
+    float: left;
+    width: 100%;
+    height: 100%; }
+.nav .nav_box .left {
+    float: left;
+    width: 100%;
+    height: 100%; }
+.nav .nav_box .left .logo {
+    height: 100%;
+    width: 100%;
+    background: url("../img/logo.png") center no-repeat;
+    overflow: hidden; }
+.nav .nav_box .left .logo .link {
+    margin-top: 1.9rem;
+    text-align: center;
+    color: #fff;
+    font-size: 0.7rem; }
+.header {
+    height: 14rem;
+    overflow: hidden;
+    position: relative;
+    z-index: 100; }
+.header .banner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: -9999; }
+.header .banner img {
+    width: 100%;
+    z-index: -9998;
+    min-width: 1530px; }
+.header .banner .cover {
+    position: absolute;
+    z-index: 9;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4); }
+@media \0screen\,screen\9 {
+    .header .banner .cover {
+        background: #000;
+        filter: Alpha(Opacity=40); } }
+.header .home {
+    position: absolute;
+    width: 100%;
+    top: 50%; }
+.header .home .home_box {
+    width: 100%;
+    margin: 0 auto; }
+.header .home h1 {
+    text-align: center;
+    font-size:1.8rem;
+    color: #fff; }
+.sample {
+    width:100%;
+    margin:60px auto;
+}
+.sample .title {
+    font-size: 24px;
+    margin-bottom: 20px; }
+.sample .school {
+    clear: both; }
+.sample .school h3 {
+    margin-bottom: 20px;
+    line-height: 40px;
+    border-bottom: 4px solid #FF8C00;
+    color: #b70f20;
+    font-family: BoldRoboto;
+    background-size: 24px; }
+.sample .school ._box {
+    font-family: Roboto;
+    background: #fff;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #ccc; }
+.sample .school ._box .list {
+    background: #fff;
+    display: block;
+    line-height: 40px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #666;
+    padding: 0 0.6rem;
+    height: 40px;
+    position: relative;
+    text-overflow:ellipsis;
+    overflow:hidden;
+    white-space:nowrap;
+}
+.sample .school ._box .list span {
+    display:none;
+    position: absolute;
+    right: 20px;
+    *top: 15px; }
+.sample .school ._box .list span img {
+    height: 8px;
+    width: 18px;
+    margin-left: 2px;
+    padding-top: 1px; }
+.sample .school ._box .content {
+    border-top: 1px solid red;
+    padding: 1rem 0.6rem 4rem; }
+
+.sample .school ._box .content img{
+    width:100%;
+    float: left;
+    margin-bottom:6px;
+}
+.sample .school ._box .content p{
+    line-height: 30px;
+    font-size: 0.65rem;
+}
+.sample .school .weight {
+    font-weight: bold;
+    margin-top:20px;
+}
+.sample .school .color {
+    color: #64990b; }
+.sample .school .no_border {
+    border-bottom: none; }
+.footer {
+    height: 100px;
+    background: #eee; }
+.footer .box {
+    margin: 0 auto;
+    width: 100%;
+    line-height: 100px; }
+.footer .box p {
+    text-align: center;
+    color: #999;
+    font-size: 14px; }
+
