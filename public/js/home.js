@@ -39,11 +39,6 @@ function readyHandler() {
         var m_message = message_form.find("textarea[name='message']");
         var return_info = message_form.find(".return_info");
         var getCode = $("#get_code,#get_code_reset");
-        var signBtn = $(".sign_btn");
-        var resetBtn = $(".reset_btn");
-        var Login = $("#login");
-        var Sign = $("#sign");
-        var Reset = $("#reset_password");
         var serv = $(".service .content .box .serv");
         var faqContent = $(".FAQ .content");
         // 手机端的适配
@@ -130,23 +125,48 @@ function readyHandler() {
         //登陆时异步获取信息
 
         //----------------------------------------------------------
+        var timer2;
         l_userName.on("keyup",function(){
-            // $.ajax({
-            //     type:"post",
-            //     url:"127.0.0.1:8888/login.html",
-            //     data:l_userName.val(),
-            //     success:function(data){
-            //         console.log(data);
-            //     }
-            // })
-            var xhr = new XMLHttpRequest();
-            xhr.open("post","http://127.0.0.1:8888/public/login.html");
-            xhr.onreadystatechange = function(){
-                if(xhr.readyState==4&&xhr.status==200){
-                    console.log(xhr.responseText);
-                }
-            };
-            xhr.send(l_userName.val());
+            clearTimeout(timer2);
+            timer2 = setTimeout(function(){
+                $.ajax({
+                    type:"post",
+                    url:"http://127.0.0.1:3000/ajax",
+                    data:l_userName.val(),
+                    success:function(data){
+                        if(!data){
+                            l_userName.parent().next().html("用户不存在！");
+                        }
+                        else{
+                            l_userName.parent().next().html("用户名可用！");
+                        }
+                    }
+                });
+            },1000);
+        });
+        //----------------------------------------------------------
+
+        //注册时异步获取信息
+
+        //----------------------------------------------------------
+        var timer3;
+        s_userName.on("keyup",function(){
+            clearTimeout(timer2);
+            timer3 = setTimeout(function(){
+                $.ajax({
+                    type:"post",
+                    url:"http://127.0.0.1:3000/ajax",
+                    data:s_userName.val(),
+                    success:function(data){
+                        if(!data){
+                            s_userName.parent().next().html("用户名可用！");
+                        }
+                        else{
+                            s_userName.parent().next().html("用户已存在！");
+                        }
+                    }
+                });
+            },1000);
         });
 
 
@@ -318,6 +338,7 @@ function readyHandler() {
                 s_password2.focus();
                 return false;
             }
+
         }
         function submitHandler4() {
             if(!$.trim(r_email.val())||(r_email.attr("class")&&r_email.attr("class").indexOf('placeholder')!=-1)){
@@ -388,19 +409,6 @@ function readyHandler() {
         function reg(str){
             return (/^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/).test(str);
         }
-
-        //点击注册切换到注册框
-        signBtn.click(function(){
-            Login.animate({"left":"-100%"});
-            Sign.animate({"left":"0"},1000,'easeOutBounce');
-        });
-        //点击忘记密码切换
-        resetBtn.click(function(){
-            Login.animate({"top":"100%"});
-            Reset.animate({"top":0},1000,'easeOutBounce');
-        });
-
-
 
 
 

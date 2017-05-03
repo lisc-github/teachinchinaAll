@@ -33,44 +33,51 @@
 </div>
 <div class="shell">
     <div class="welcome">
-        <h1>Sign in to Teaching in China!</h1>
+        <h1>Sign up for Teaching in China!</h1>
     </div>
     <div class="login_sign">
         <div class="message">
             <%=message%>
         </div>
-        <div id="login">
-            <div class="login">
-                <form action="http://127.0.0.1:3000/login" method="post" class="first_row" id="login_form">
+        <div id="sign">
+            <div class="sign">
+                <form action="http://127.0.0.1:3000/sign" method="post" class="first_row" id="sign_form">
                     <div class="row_box">
                         <span><i class="fa fa-user"></i></span>
-                        <input type="text" name="l_username" placeholder="Name/Email">
+                        <input type="text" name="s_username" placeholder="Name">
+                    </div>
+                    <span class="feedback"></span>
+                    <div class="row_box">
+                        <span><i class="fa fa-envelope"></i></span>
+                        <input type="text" name="s_email" placeholder="Email">
+                    </div>
+                    <span class="feedback"></span>
+                    <div class="row_box">
+                        <input type="text" name="s_code" placeholder="Verification Code">
+                        <div class="get_code">
+                            <input type="button" value="Get Verification Code" id="get_code">
+                        </div>
                     </div>
                     <span class="feedback"></span>
                     <div class="row_box">
                         <span><i class="fa fa-lock"></i></span>
-                        <input type="password" name="l_password" placeholder="Password">
+                        <input type="password" name="s_password" placeholder="Password">
                     </div>
                     <span class="feedback"></span>
                     <div class="row_box">
-                        <input type="text" name="l_code" placeholder="Verification Code">
-                        <div class="code_img"></div>
+                        <span><i class="fa fa-lock"></i></span>
+                        <input type="password" name="s_password_again" placeholder="Password Again">
                     </div>
                     <span class="feedback"></span>
                     <div class="row_box">
                         <div>
-                            <input type="submit" value="Login">
+                            <input type="submit" value="Submit">
                         </div>
-                    </div>
-                    <div class="last_row">
-                        <a href="http://127.0.0.1:3000/reset_password" class="reset_btn">Forget the Password?</a>
-                        <a href="http://127.0.0.1:3000/sign" class="sign_btn">Sign up now!</a>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
 </div>
 <div class="footer">
     <div class="box">

@@ -9,7 +9,6 @@ var ejs = require("ejs");
 
 var index = require('./routes/index');
 var form = require('./routes/form');
-var login = require('./routes/login');
 var temp = require('./routes/temp');
 
 var app = express();
@@ -28,12 +27,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
-  secret:'12345'
+  secret:'12345',
+  message:'',
+  user_name:''
 }));
 
 app.use('/', index);
 app.use('/form',form);
-app.use('/login',login);
 app.use('/temp',temp);
 
 // catch 404 and forward to error handler
