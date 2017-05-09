@@ -28,6 +28,10 @@
                     <div class="logo"></div>
                 </a>
             </div>
+            <div class="right">
+                <a href="/" class="index">Index</a>
+                <a href="/logout" class="exit">Exit</a>
+            </div>
         </div>
     </div>
 </div>
@@ -42,14 +46,14 @@
     </div>
     <div class="form">
         <p class="notice">Be sure to fill in the options with *</p>
-        <form action="" id="apply_form">
+        <form action="/form" method='post' id="apply_form">
             <div class="box">
                 <div class="l_box need">
                     <input type="text" name="firstName" placeholder="FirstName"><span class="red"></span>
                     <p class="info"></p>
                 </div>
-                <div class="r_box need">
-                    <input type="text" name="middleName" placeholder="MiddleName"><span class="red"></span>
+                <div class="r_box">
+                    <input type="text" name="middleName" placeholder="MiddleName">
                     <p class="info"></p>
                 </div>
                 <div class="clear"></div>
@@ -71,21 +75,21 @@
             <div class="box birth">
                 <div class="i_box need">
                     <div class="select select1">
-                        <input type="text" placeholder="MM" class="select_ipt select_ipt1" readonly="readonly">
+                        <input type="text" placeholder="MM" name="birthday" class="select_ipt select_ipt1" readonly="readonly">
                     </div>
                     <span class="red"></span>
                     <p class="info"></p>
                 </div>
                 <div class="j_box need">
                     <div class="select select2">
-                        <input type="text" placeholder="DD" class="select_ipt select_ipt2" readonly="readonly">
+                        <input type="text" placeholder="DD" name="birthmonth" class="select_ipt select_ipt2" readonly="readonly">
                     </div>
                     <span class="red"></span>
                     <p class="info"></p>
                 </div>
                 <div class="k_box need">
                     <div class="select select3">
-                        <input type="text" placeholder="YYYY" class="select_ipt select_ipt3" readonly="readonly">
+                        <input type="text" placeholder="YYYY" name="birthyear" class="select_ipt select_ipt3" readonly="readonly">
                     </div>
                     <span class="red"></span>
                     <p class="info"></p>
@@ -309,5 +313,6 @@
         <p>© 2017 by www.js.teachinginchina.org</p>
     </div>
 </div>
+<%-alert%>
 </body>
 </html>

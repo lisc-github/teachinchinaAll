@@ -46,7 +46,7 @@
             var select = document.createElement("input");
             select.setAttribute("class",'ipt');
             selectBox.style.height = height + 'px';
-            selectBox.style.border = '1px solid #ccc';
+            selectBox.style.border = '1px solid #ddd';
             selectBox.style.backgroundColor = '#fff';
             select.style.border = 'none';
             select.style.padding = '0';

@@ -45,7 +45,6 @@
                 var flag = false;
                 var li = opt.children(0).children();
                 input.click(function(){
-                    console.log(1)
                     if(!flag){
                         opt.css('display','block');
                         flag = true;

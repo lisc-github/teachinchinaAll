@@ -137,6 +137,9 @@ h1 {
             float: left; }
           .header .home .home_box .login .box .a2 {
             float: right; }
+          .header .home .home_box .login .box .a3 {
+            display:block;
+            width: 370px; }
   .header .login_box, .header .sign_box {
     overflow: hidden;
     position: absolute;
@@ -511,7 +514,7 @@ h1 {
           font-size: 14px;
           font-family: Arial;
           background: #fff;
-          border: 1px solid #ccc;
+          border: 1px solid #ddd;
           outline: none;
           -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.075);
           -moz-box-shadow: 0 0 3px rgba(0, 0, 0, 0.075);

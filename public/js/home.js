@@ -41,6 +41,7 @@ function readyHandler() {
         var getCode = $("#get_code,#get_code_reset");
         var serv = $(".service .content .box .serv");
         var faqContent = $(".FAQ .content");
+        var codeImg = $(".code_img");
         // 手机端的适配
         var w = document.documentElement.clientWidth;
         var html = $("html");
@@ -126,12 +127,12 @@ function readyHandler() {
 
         //----------------------------------------------------------
         var timer2;
-        l_userName.on("keyup",function(){
+        l_userName.on("input",function(){
             clearTimeout(timer2);
             timer2 = setTimeout(function(){
                 $.ajax({
                     type:"post",
-                    url:"http://127.0.0.1:3000/ajax",
+                    url:"/ajax",
                     data:l_userName.val(),
                     success:function(data){
                         if(!data){
@@ -144,18 +145,42 @@ function readyHandler() {
                 });
             },1000);
         });
+        //页面加载时获取验证码
+        getCodeImg();
+        function getCodeImg(){
+            $.ajax({
+                type:"get",
+                url:"http://127.0.0.1:3000/codeImg",
+                success:function(data){
+                    codeImg.html("<img src='/codeImg'/>");
+                }
+            });
+        }
+        //----------------------------------------------------------
+
+        //登陆时异步获取验证码
+
+        //----------------------------------------------------------
+        codeImg.on("click",function(){
+            getCodeImg();
+        });
+
         //----------------------------------------------------------
 
         //注册时异步获取信息
 
         //----------------------------------------------------------
-        var timer3;
-        s_userName.on("keyup",function(){
-            clearTimeout(timer2);
-            timer3 = setTimeout(function(){
+        s_userName.on("input",function(){
+            if(s_userName.val().length<4){
+                s_userName.parent().next().html("too short!");
+            }
+            else if(s_userName.val().length>30){
+                s_userName.parent().next().html("too long!");
+            }
+            else{
                 $.ajax({
                     type:"post",
-                    url:"http://127.0.0.1:3000/ajax",
+                    url:"/ajax",
                     data:s_userName.val(),
                     success:function(data){
                         if(!data){
@@ -166,91 +191,11 @@ function readyHandler() {
                         }
                     }
                 });
-            },1000);
-        });
-
-
-
-
-        //----------------------------------------------------------
-
-        //点击登陆效果
-
-        //----------------------------------------------------------
-        login.on("click",function () {
-            if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-                window.location = "login.html";
-            }
-            else{
-                login_box.css("z-index",1000);
-                if(parseInt(header.css('width'))<650){
-                    login_box.animate({opacity:"0.96",width:"96%",height:'13.6rem',marginTop:"-6.8rem",marginLeft:"-48%"});
-                }
-                else{
-                    login_box.animate({opacity:"0.96",width:"600px",height:'346px',marginTop:"-173px",marginLeft:"-300px"});
-                }
-                clickHandler2();
-            }
-
-        });
-        sign_up.on("click",function () {
-            if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-                window.location = "login.html#sign";
-            }
-            else{
-                sign_box.css("z-index",1000);
-                if(parseInt(header.css('width'))<650){
-                    sign_box.animate({opacity:"0.96",width:"96%",height:'20rem',marginTop:"-9rem",marginLeft:"-48%"});
-                }
-                else{
-                    sign_box.animate({opacity:"0.96",width:"600px",height:'450px',marginTop:"-225px",marginLeft:"-300px"});
-                }
-                clickHandler1();
             }
 
         });
 
-        //----------------------------------------------------------
 
-        //关闭登录注册框
-
-        //----------------------------------------------------------
-        close1.on("click",clickHandler1);
-        close2.on("click",clickHandler2);
-        function clickHandler1(){
-            login_box.animate({opacity:"0",width:"100px",height:'100px',marginTop:"-50px",marginLeft:"-50px"},function(){
-                $(this).css({"z-index":-99999});
-            });
-            feedback.each(function () {  // 关闭登录框后清空反馈信息
-                $(this).html("");
-            });
-            input.each(function () {
-                $(this).val("");
-                if(!isPlaceholder()){
-                    var s = $(this);
-                    var pValue = s.attr("placeholder");
-                    var sValue = s.val();
-                    s.val(pValue).addClass("placeholder");
-                }
-            })
-        }
-        function clickHandler2(){
-            sign_box.animate({opacity:"0",width:"100px",height:'100px',marginTop:"-50px",marginLeft:"-50px"},function(){
-                $(this).css({"z-index":-99999});
-            });
-            feedback.each(function () {
-                $(this).html("");
-            });
-            input.each(function () {
-                $(this).val("");
-                if(!isPlaceholder()){
-                    var s = $(this);
-                    var pValue = s.attr("placeholder");
-                    var sValue = s.val();
-                    s.val(pValue).addClass("placeholder");
-                }
-            })
-        }
         //判断是否支持placeholder
         function isPlaceholder() {
             var input = document.createElement('input');
@@ -301,8 +246,24 @@ function readyHandler() {
             else{
                 s_userName.parent().next().html("");
             }
+            if(s_userName.val().length>30||s_userName.val().length<4){
+                s_userName.parent().next().html("Length not up to standard");
+                s_userName.focus();
+                return false;
+            }
+            else{
+                s_userName.parent().next().html("");
+            }
             if(!$.trim(s_email.val())||(s_email.attr("class")&&s_email.attr("class").indexOf('placeholder')!=-1)){
                 s_email.parent().next().html("Please input your Email!");
+                s_email.focus();
+                return false;
+            }
+            else{
+                s_email.parent().next().html("");
+            }
+            if(!reg($.trim(s_email.val()))){
+                s_email.parent().next().html("Incorrect mailbox format");
                 s_email.focus();
                 return false;
             }
@@ -477,9 +438,6 @@ function readyHandler() {
         //首页的加载动画效果
 
         //---------------------------------------------------
-        item.eq(0).find(".move").each(function(){
-            $(this).hide();
-        });
         changeHeight();
         function changeHeight(){
             setTimeout(function () {
@@ -495,7 +453,6 @@ function readyHandler() {
             },200);//safari下的兼容
         }
 
-        moveTo(item.eq(0),1,0);
         $(window).on("scroll",function () {
             var h = $(window).scrollTop();
             var win_height = $(window).height();

@@ -18,7 +18,7 @@ body {
     margin: 0 auto;
     overflow: hidden;
     height: 100%; }
-    .header .nav .nav_box a {
+    .header .nav .nav_box .left a {
       overflow: hidden;
       float: left;
       width: 100%;
@@ -32,6 +32,21 @@ body {
         width: 100%;
         background: url("../img/logo.png") 0 center no-repeat;
         overflow: hidden; }
+    .header .nav .nav_box .right{
+      float: right;
+      height:100%;
+      line-height:80px;
+    }
+    .header .nav .nav_box .right a{
+      color:#fff;
+      text-decoration:none;
+      margin-left:30px;
+    }
+    .header .nav .nav_box .right .exit:hover{
+      color:red;
+      text-decoration:underline;
+    }
+
 @media \0screen\,screen\9 {
   .header .nav {
     background: #000;
@@ -64,6 +79,13 @@ body {
       text-align: center;
       font-size:16px;
       line-height: 40px; }
+    .main .img .name p {
+      -ms-text-overflow: ellipsis;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      padding:0 10px;
+    }
   .main .form {
     border: 1px solid #ddd;
     width: 73%;

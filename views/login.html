@@ -36,15 +36,15 @@
         <h1>Sign in to Teaching in China!</h1>
     </div>
     <div class="login_sign">
-        <div class="message">
-            <%=message%>
-        </div>
         <div id="login">
+            <div class="message_box">
+                <%-message%>
+            </div>
             <div class="login">
-                <form action="http://127.0.0.1:3000/login" method="post" class="first_row" id="login_form">
+                <form action="/login" method="post" class="first_row" id="login_form">
                     <div class="row_box">
                         <span><i class="fa fa-user"></i></span>
-                        <input type="text" name="l_username" placeholder="Name/Email">
+                        <input type="text" name="l_username" placeholder="Name">
                     </div>
                     <span class="feedback"></span>
                     <div class="row_box">
@@ -63,14 +63,13 @@
                         </div>
                     </div>
                     <div class="last_row">
-                        <a href="http://127.0.0.1:3000/reset_password" class="reset_btn">Forget the Password?</a>
-                        <a href="http://127.0.0.1:3000/sign" class="sign_btn">Sign up now!</a>
+                        <a href="/reset_password" class="reset_btn">Forget the Password?</a>
+                        <a href="/sign" class="sign_btn">Sign up now!</a>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
 </div>
 <div class="footer">
     <div class="box">
