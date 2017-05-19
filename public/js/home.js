@@ -150,7 +150,7 @@ function readyHandler() {
         function getCodeImg(){
             $.ajax({
                 type:"get",
-                url:"http://127.0.0.1:3000/codeImg",
+                url:"/codeImg",
                 success:function(data){
                     codeImg.html("<img src='/codeImg'/>");
                 }
@@ -158,7 +158,7 @@ function readyHandler() {
         }
         //----------------------------------------------------------
 
-        //登陆时异步获取验证码
+        //登陆时异步获取验证码图片
 
         //----------------------------------------------------------
         codeImg.on("click",function(){
@@ -360,6 +360,15 @@ function readyHandler() {
                            $(that).css("background","#fff");
                        }
                    },1000);
+                   $.ajax({
+                       type:"post",
+                       url:"/emailCode",
+                       data:email,
+                       success:function(data){
+
+                       }
+
+                   })
                }
                else
                    alert("Please enter the correct email address!")

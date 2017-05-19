@@ -72,14 +72,6 @@ function readyHandler(){
     var year_select = createSelect(".select3",".select_ipt3",arr2);
 
 
-
-
-
-
-
-
-
-
     /**
      * 表单提交前的验证
      */
@@ -128,7 +120,27 @@ function readyHandler(){
         })
     });
 
+    var logout = $(".exit");
+    logout.click(function(){
+        if(confirm("are you sure to logout?")){
+            window.location.replace('/logout');
+        }
+    });
 
+    var indexExit = $(".indexExit");
+    var indexBox = $(".nav_box .right");
+    var flag = false;
+    indexExit.click(function(){
+        if(flag){
+            indexBox.hide();
+            flag = !flag;
+        }
+        else{
+            indexBox.show();
+            flag = !flag;
+        }
+
+    })
 
 }
 

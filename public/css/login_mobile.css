@@ -8,15 +8,18 @@ html {
   font-size: 20px; }
 
 body {
+  background:url("../img/city2.jpg") center;
   width: 100%;
   height: 100%; }
+.header{
+  display:none;
+}
   body .bg_pic {
-    position: absolute;
     width: 100%;
-    height: 100%;
     overflow: hidden; }
     body .bg_pic img {
-      height: 100%; }
+      display:none;
+       }
   body .nav {
     z-index: 99999;
     /*position: fixed;*/
@@ -52,33 +55,34 @@ body {
             text-align: center;
             color: #fff;
             font-size: 0.7rem; }
+.message{
+  background:#fcf8e3;
+  text-align: center;
+  line-height:40px;
+  color:red;
+  font-size: 0.8rem;
+}
+body .shell #login .message_box, body .shell #sign .message_box, body .shell #reset_password .message_box {
+    height:50px;
+  }
   body .shell {
     width: 100%;
-    position: absolute;
-    height: 25rem;
-    top: 50%;
-    left: 50%;
-    margin-top: -12.5rem;
-    margin-left: -50%; }
+    position: relative;
+    margin-top:3rem;
+    }
     body .shell .welcome {
       width: 100%;
       text-align: center;
       color: #fff;
       display: none; }
     body .shell .login_sign {
-      position: absolute;
+      position: relative;
       width: 100%;
-      height: 20.5rem;
-      top: 50%;
-      left: 50%;
-      margin-left: -50%;
-      margin-top: -12rem;
       overflow: hidden; }
     body .shell #login, body .shell #sign, body .shell #reset_password {
       z-index: 100;
       overflow: hidden;
-      padding-top: 2.5rem;
-      position: absolute;
+      position: relative;
       width: 96%;
       margin-left: 2%;
       height: 18rem;
@@ -87,9 +91,9 @@ body {
       background: rgba(0, 0, 0, 0.6);
     }
     body .shell #sign {
-      left: 100%; }
+    }
     body .shell #reset_password {
-      top: -100%; }
+    }
     body .shell .login, body .shell .sign, body .shell .reset_password {
       width: 92%;
       margin-left: 4%; }
@@ -151,7 +155,12 @@ body {
           position: absolute;
           right: 0;
           left: 56%; }
-        body .shell .login .row_box .get_code, body .shell .sign .row_box .get_code, body .shell .reset_password .row_box .get_code {
+        body .shell .login .row_box .code_img img, body .shell .sign .row_box .code_img img, body .shell .reset_password .row_box .code_img img{
+          width:100%;
+          height:100%;
+        }
+
+body .shell .login .row_box .get_code, body .shell .sign .row_box .get_code, body .shell .reset_password .row_box .get_code {
           height: 2rem;
           position: absolute;
           right: 0;
@@ -182,7 +191,7 @@ body {
   height: 3rem;
   width: 100%;
   background: #eee;
-  position: fixed;
+  margin-top:2rem;
   bottom: 0; }
   .footer .box {
     margin: 0 auto;

@@ -7,6 +7,7 @@ var mysqlData = require('../mysqlData');
 var crypto = require('crypto');
 var BMP24 = require('../BMP24');
 var makeCapcha = require('../makeCode');
+var sendEmail = require("../emailMain");
 function md5(text){
     return crypto.createHash('md5').update(text).digest('hex');
 }
@@ -51,7 +52,14 @@ router.route('/sign')
         arr.push(req.body.s_username);
         arr.push(req.body.s_email);
         arr.push(md5(req.body.s_password));
-        mysqlData.addData(arr,req,res);
+        if(req.body.s_code!= req.session.emailCode){
+            req.session.info = '验证码错误';
+            res.redirect('sign');
+        }
+        else{
+            mysqlData.addData(arr,req,res);
+        }
+
     });
 
 router.route('/reset_password')
@@ -62,9 +70,15 @@ router.route('/reset_password')
         //数据库修改密码
         var arr = [];
         arr.push(req.body.r_email);
-        arr.push(req.body.r_code);
         arr.push(md5(req.body.r_password));
-        mysqlData.changeData(arr,req,res);
+        if(req.body.r_code!= req.session.emailCode){
+            req.session.info = '验证码错误';
+            res.redirect('reset_password');
+        }
+        else{
+            mysqlData.changeData(arr,req,res);
+        }
+
     });
 
 router.post('/ajax',function(req,res){
@@ -108,5 +122,23 @@ router.post('/userData',function(req,res){
 });
 router.post('/formData',function(req,res){
     mysqlData.getFormData(req,res);
+});
+router.post("/emailCode",function(req,res){
+    var post = '';
+    req.on('data',function(chuck){
+        post += chuck;
+    });
+    req.on('end',function(){
+        var content;
+        crypto.randomBytes(2,function(ex,buf){
+            var token = buf.toString('hex');
+            req.session.emailCode = token;
+            sendEmail(post,"email code for teaching in china",token);
+            res.end();
+        });
+    });
+});
+router.post('/contactUs',function(req,res){
+
 });
 module.exports = router;

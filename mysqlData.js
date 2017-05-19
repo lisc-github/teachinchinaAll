@@ -23,7 +23,6 @@ obj.addData = function(data,req,res){
         for(var i=0;i<result.length;i++){
             arr.push(result[i].name);
         }
-
         if(arr.indexOf(data[0])===-1){
             connection.query(addSql,data,function(err,result){
                 if(err){
@@ -108,14 +107,10 @@ obj.changeData = function(data,req,res){
             req.session.info = '邮箱不存在';
             res.redirect('reset_password');
         }
-        else if(data[1]!=="123") {
-            req.session.info = '邮箱验证码错误';
-            res.redirect('reset_password');
-        }
         else{
             var id = arr.indexOf(data[0])+1;
             var modSql = 'UPDATE userinfo SET password= ? WHERE Id = ?';
-            var modSqlParams = [data[2],id];
+            var modSqlParams = [data[1],id];
             connection.query(modSql,modSqlParams,function (err, result) {
                 if(err){
                     console.log('[UPDATE ERROR] - ',err.message);
@@ -133,8 +128,8 @@ obj.formData = function(data,req,res){
     var  sql = 'SELECT * FROM userform';
     var addSql = 'INSERT INTO userform(firstname,middlename,lastname,nickname,birthday,' +
         'birthmonth,birthyear,gender,email,address,city,state,country,postalcode,mobilephone,' +
-        'homephone1,homephone2,major,degree,programChoice,schoolChoice,userName) ' +
-        'VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+        'homephone1,homephone2,major,degree,otherDegree,programChoice,schoolChoice,userName) ' +
+        'VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
     var arr = [];
     for(var i in data){
         arr.push(data[i]);
@@ -161,7 +156,27 @@ function addMark(userName){
     })
 }
 obj.getUserData = function(req,res){
-    connection.query(sql,function(err,result){
+    var sql;
+    var post = '';
+    var sqlParams;
+    for(var i in req.body){
+        post = i;
+    }
+    if(post=='formYes'){
+        sql = "SELECT * FROM userinfo WHERE form='yes'";
+    }
+    else if(post=='formNo'){
+        sql = "SELECT * FROM userinfo WHERE form=''";
+    }
+    else if(post==''){
+        sql = "SELECT * FROM userinfo";
+    }
+    else{
+        sql = "SELECT * FROM userinfo WHERE name = ?";
+        sqlParams = [post];
+    }
+
+    connection.query(sql,sqlParams,function(err,result){
         if(err){
             return;
         }
@@ -173,7 +188,6 @@ obj.getFormData = function(req,res){
     for(var i in req.body){
         post = i;
     }
-    console.log(post);
     var sql = 'SELECT * FROM userform WHERE userName= ? ';
     var sqlParams = [post];
     connection.query(sql,sqlParams,function(err,result){

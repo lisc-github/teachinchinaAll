@@ -207,30 +207,10 @@ function readyHandler() {
         }
         $("input[type='text']").on("keydown",function () {
             $(".info").text("");
-        })
+        });
 
         function test(str){
             return (/^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/).test(str);
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     })()
 }
