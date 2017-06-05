@@ -2,6 +2,10 @@
  * Created by admin on 2017/5/2.
  */
 var mysql = require('mysql');
+var crypto = require('crypto');
+function md5(text){
+    return crypto.createHash('md5').update(text).digest('hex');
+}
 var obj = {};
 var connection = mysql.createConnection({
     host:'localhost',
@@ -10,12 +14,18 @@ var connection = mysql.createConnection({
     database:'liscdb'
 });
 connection.connect();
+connection.query("SET time_zone = '+8:00'")
 var  sql = 'SELECT * FROM userinfo';
-var addSql = 'INSERT INTO userinfo(name,email,password) VALUES (?,?,?)';
+var addSql = 'INSERT INTO userinfo(date,name,email,password) VALUES (?,?,?,?)';
 
 
 obj.addData = function(data,req,res){
     var arr = [];
+    var arr1 = [];
+    var emailCode = data.splice(3,1);
+    var nowDate = new Date();
+    var timeStr = nowDate.toLocaleDateString();
+    data.splice(0,0,timeStr);
     connection.query(sql,function(err,result){
         if(err){
             return;
@@ -23,20 +33,30 @@ obj.addData = function(data,req,res){
         for(var i=0;i<result.length;i++){
             arr.push(result[i].name);
         }
-        if(arr.indexOf(data[0])===-1){
+        for(var j=0;j<result.length;j++){
+            arr1.push(result[j].email);
+        }
+        if(arr.indexOf(data[1])!=-1){
+            req.session.info = 'User name already exists';
+            res.redirect('sign');
+        }
+        else if(arr1.indexOf(data[2])!=-1){
+            req.session.info = 'The mailbox has been registered';
+            res.redirect('sign');
+        }
+        else if(emailCode!= req.session.emailCode){
+            req.session.info = 'Verify code error';
+            res.redirect('sign');
+        }
+        else{
             connection.query(addSql,data,function(err,result){
                 if(err){
                     console.log('[INSERT ERROR] - ',err.message);
                     return;
                 }
-                console.log('插入数据成功');
-                req.session.info = '注册成功，请登陆';
+                req.session.info = 'Registration successful, please login';
                 res.redirect('login');
             })
-        }
-        else{
-            req.session.info = '用户名已存在';
-            res.redirect('sign');
         }
     });
 };
@@ -48,6 +68,7 @@ obj.ajaxData = function(data,req,res){
         }
         for(var i=0;i<result.length;i++){
             arr.push(result[i].name);
+            arr.push(result[i].email);
         }
         if(data){
             if(arr.indexOf(data)===-1){
@@ -63,26 +84,34 @@ obj.ajaxData = function(data,req,res){
 };
 
 obj.queryData = function(data,req,res){
-    var arr = [];
+    var arrName = [];
+    var arrEmail = [];
     connection.query(sql,function(err,result){
         if(err){
             return;
         }
         for(var i=0;i<result.length;i++){
-            arr.push(result[i].name);
+            arrName.push(result[i].name);
+            arrEmail.push(result[i].email);
         }
-        if(arr.indexOf(data[0])===-1){
-            req.session.info = '用户名不存在';
+        if(arrName.indexOf(data[0])===-1 && arrEmail.indexOf(data[0])===-1){
+            req.session.info = 'Users are not registered yet';
             res.redirect('login');
         }
-        else{
-            var index = arr.indexOf(data[0]);
+        else {
+            var index;
+            if(arrName.indexOf(data[0])!=-1){
+                index = arrName.indexOf(data[0]);
+            }
+            else{
+                index = arrEmail.indexOf(data[0]);
+            }
             if(data[1] !== result[index].password){
-                req.session.info = '密码错误';
+                req.session.info = 'Password error';
                 res.redirect('login');
             }
             else if(data[2].toUpperCase() !== req.session.code){
-                req.session.info = '验证码错误';
+                req.session.info = 'Verify code error';
                 res.redirect('login');
             }
             else{
@@ -96,6 +125,7 @@ obj.queryData = function(data,req,res){
 };
 obj.changeData = function(data,req,res){
     var arr = [];
+    var emailCode = data.splice(2,1);
     connection.query(sql,function(err,result){
         if(err){
             return;
@@ -103,20 +133,24 @@ obj.changeData = function(data,req,res){
         for(var i=0;i<result.length;i++){
             arr.push(result[i].email);
         }
+
         if(arr.indexOf(data[0])===-1){
-            req.session.info = '邮箱不存在';
+            req.session.info = 'Mailbox does not exist';
+            res.redirect('reset_password');
+        }
+        else if(emailCode!= req.session.emailCode){
+            req.session.info = 'Verify code error';
             res.redirect('reset_password');
         }
         else{
-            var id = arr.indexOf(data[0])+1;
-            var modSql = 'UPDATE userinfo SET password= ? WHERE Id = ?';
-            var modSqlParams = [data[1],id];
+            var modSql = 'UPDATE userinfo SET password= ? WHERE email = ?';
+            var modSqlParams = [data[1],data[0]];
             connection.query(modSql,modSqlParams,function (err, result) {
                 if(err){
                     console.log('[UPDATE ERROR] - ',err.message);
                     return;
                 }
-                req.session.info = '密码已修改';
+                req.session.info = 'Password has been modified';
                 res.redirect("login");
             });
         }
@@ -152,7 +186,6 @@ function addMark(userName){
             console.log('[INSERT ERROR] - ',err.message);
             return;
         }
-        console.log('修改成功');
     })
 }
 obj.getUserData = function(req,res){
@@ -199,7 +232,88 @@ obj.getFormData = function(req,res){
         res.send(result);
     })
 };
+obj.addContactData = function(data,req,res){
+    var addSql = 'INSERT INTO contactus(date,firstname,lastname,email,phonenumber,interestarea,location,comments) VALUES (?,?,?,?,?,?,?,?)';
+    var arr=[];
+    for(var i in data){
+        arr.push(data[i]);
+    }
+    var nowDate = new Date();
+    var timeStr = nowDate.toLocaleDateString();
+    arr.splice(0,0,timeStr);
+    connection.query(addSql,arr,function(err,result){
+        if(err){
+            console.log('[INSERT ERROR] - ',err.message);
+            return;
+        }
+        res.redirect('/');
+    })
+};
 
+obj.addJobData = function(data,req,res){
+    var addSql = 'INSERT INTO getnewjob(date,email) VALUES (?,?)';
+    var arr=[];
+    arr.push(data.email);
+    var nowDate = new Date();
+    var timeStr = nowDate.toLocaleDateString();
+    arr.splice(0,0,timeStr);
+    connection.query(addSql,arr,function(err,result){
+        if(err){
+            console.log('[INSERT ERROR] - ',err.message);
+            return;
+        }
+        res.redirect('/');
+    })
+};
+obj.getContactData = function(req,res){
 
+    var sql = 'SELECT * FROM contactus';
+    connection.query(sql,function(err,result){
+        if(err){
+            console.log(err.stack);
+            return;
+        }
+        console.log(result);
+        res.send(result);
+    })
+};
+obj.getJobData = function(req,res){
+
+    var sql = 'SELECT * FROM getnewjob';
+    connection.query(sql,function(err,result){
+        if(err){
+            console.log(err.stack);
+            return;
+        }
+        console.log(result);
+        res.send(result);
+    })
+};
+
+//后台管理中心
+obj.queryManageData = function(data,req,res){
+    var sql = "SELECT * FROM admininfo";
+    connection.query(sql,function(err,result){
+        if(err){
+            return;
+        }
+        if(data.name != result[0].name){
+            req.session.info = "用户名错误";
+            res.redirect('/manage');
+        }
+        else if(md5(data.password) != result[0].password){
+            req.session.info = "密码错误";
+            res.redirect('/manage');
+        }
+        else if(data.code.toUpperCase() != req.session.manageCode){
+            req.session.info = "验证码错误";
+            res.redirect('/manage');
+        }
+        else{
+            req.session.manageUser = data.name;
+            res.redirect('manage/user');
+        }
+    })
+};
 
 module.exports = obj;

@@ -4,8 +4,11 @@
 module.exports = {
     //邮件配置
     email: {
-        service: 'QQ',
-        user: '151764804@qq.com',
-        pass: 'kyqvposgtdywbigj',
+        host: 'smtp.uschinaedu.cn',
+        port: 25,
+        auth: {
+            user: 'uce12@uschinaedu.cn',
+            pass: 'LSClh2016'
+        }
     }
 };

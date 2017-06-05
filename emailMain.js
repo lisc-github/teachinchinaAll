@@ -2,22 +2,15 @@
  * Created by admin on 2017/5/16.
  */
 var nodeMailer = require('nodemailer');
-var smtpTransport = require('nodemailer-smtp-transport');
 var config = require('./emailConfig');
 
-smtpTransport = nodeMailer.createTransport(smtpTransport({
-    service: config.email.service,
-    auth: {
-        user: config.email.user,
-        pass: config.email.pass
-    }
-}));
+smtpTransport = nodeMailer.createTransport(config.email);
 
 var sendMail = function (recipient, subject, html) {
 
     smtpTransport.sendMail({
 
-        from: config.email.user,
+        from: config.email.auth.user,
         to: recipient,
         subject: subject,
         html: html
@@ -26,7 +19,10 @@ var sendMail = function (recipient, subject, html) {
         if (error) {
             console.log(error);
         }
-        console.log('发送成功')
+        else{
+            console.log('发送成功')
+        }
+
     });
 };
 

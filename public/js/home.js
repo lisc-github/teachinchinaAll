@@ -101,25 +101,25 @@ function readyHandler() {
         //programs hover 的效果
 
         //----------------------------------------------------------
-            each_program.each(function () {
-                $(this).hover(
-                    function () {
-                        clearTimeout(timer);
-                        var _this = $(this);
-                        timer = setTimeout(function () {
-                            _this.find(".detail").fadeIn();
-                        },200)
-                    },
-                    function () {
-                        clearTimeout(timer);
-                        var _this = $(this);
-                        setTimeout(function () {
-                            _this.find(".detail").fadeOut();
-                        },250)
+        each_program.each(function () {
+            $(this).hover(
+                function () {
+                    clearTimeout(timer);
+                    var _this = $(this);
+                    timer = setTimeout(function () {
+                        _this.find(".detail").fadeIn();
+                    },200)
+                },
+                function () {
+                    clearTimeout(timer);
+                    var _this = $(this);
+                    setTimeout(function () {
+                        _this.find(".detail").fadeOut();
+                    },250)
 
-                    }
-                );
-            });
+                }
+            );
+        });
 
         //----------------------------------------------------------
 
@@ -136,10 +136,10 @@ function readyHandler() {
                     data:l_userName.val(),
                     success:function(data){
                         if(!data){
-                            l_userName.parent().next().html("用户不存在！");
+                            l_userName.parent().next().html("user name does not exist！");
                         }
                         else{
-                            l_userName.parent().next().html("用户名可用！");
+                            l_userName.parent().next().html("");
                         }
                     }
                 });
@@ -171,7 +171,10 @@ function readyHandler() {
 
         //----------------------------------------------------------
         s_userName.on("input",function(){
-            if(s_userName.val().length<4){
+            if(s_userName.val().indexOf('@')!=-1){
+                s_userName.parent().next().html("can't contain '@'");
+            }
+            else if(s_userName.val().length<4){
                 s_userName.parent().next().html("too short!");
             }
             else if(s_userName.val().length>30){
@@ -184,15 +187,14 @@ function readyHandler() {
                     data:s_userName.val(),
                     success:function(data){
                         if(!data){
-                            s_userName.parent().next().html("用户名可用！");
+                            s_userName.parent().next().html("");
                         }
                         else{
-                            s_userName.parent().next().html("用户已存在！");
+                            s_userName.parent().next().html("Username is already exits");
                         }
                     }
                 });
             }
-
         });
 
 
@@ -238,8 +240,8 @@ function readyHandler() {
             }
         }
         function submitHandler2() {
-            if(!$.trim(s_userName.val())||(s_userName.attr("class")&&s_userName.attr("class").indexOf('placeholder')!=-1)){
-                s_userName.parent().next().html("Please input your name!");
+            if(!$.trim(s_userName.val()) || s_userName.val().indexOf('@')!=-1 || (s_userName.attr("class")&&s_userName.attr("class").indexOf('placeholder')!=-1)){
+                s_userName.parent().next().html("Please enter a name in the correct format");
                 s_userName.focus();
                 return false;
             }

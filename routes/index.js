@@ -22,7 +22,6 @@ router.use(function(req,res,next){
     next();
 });
 router.get('/',function(req,res){
-    console.log("首页",req.session.code);
     if(!req.session.user_name){
         res.render('index',{message:"<a href='/login' class='a1 move'>Login</a><a href='/sign' class='a2 move'>Sign up</a>"});
     }
@@ -52,14 +51,8 @@ router.route('/sign')
         arr.push(req.body.s_username);
         arr.push(req.body.s_email);
         arr.push(md5(req.body.s_password));
-        if(req.body.s_code!= req.session.emailCode){
-            req.session.info = '验证码错误';
-            res.redirect('sign');
-        }
-        else{
-            mysqlData.addData(arr,req,res);
-        }
-
+        arr.push(req.body.s_code);
+        mysqlData.addData(arr,req,res);
     });
 
 router.route('/reset_password')
@@ -71,25 +64,19 @@ router.route('/reset_password')
         var arr = [];
         arr.push(req.body.r_email);
         arr.push(md5(req.body.r_password));
-        if(req.body.r_code!= req.session.emailCode){
-            req.session.info = '验证码错误';
-            res.redirect('reset_password');
-        }
-        else{
-            mysqlData.changeData(arr,req,res);
-        }
+        arr.push(req.body.r_code);
+        mysqlData.changeData(arr,req,res);
 
     });
 
 router.post('/ajax',function(req,res){
     //数据库查询数据
     var post = '';
-    req.on('data',function(chuck){
-        post += chuck;
-    });
-    req.on('end',function(){
-        mysqlData.ajaxData(post,req,res);
-    });
+    var obj = req.body;
+    for(var i in obj){
+        post = i;
+    }
+    mysqlData.ajaxData(post,req,res);
 });
 router.route('/form')
     .get(function(req,res){
@@ -123,22 +110,73 @@ router.post('/userData',function(req,res){
 router.post('/formData',function(req,res){
     mysqlData.getFormData(req,res);
 });
+router.post('/contactData',function(req,res){
+    mysqlData.getContactData(req,res);
+});
+router.post('/jobData',function(req,res){
+    mysqlData.getJobData(req,res);
+});
 router.post("/emailCode",function(req,res){
     var post = '';
-    req.on('data',function(chuck){
-        post += chuck;
-    });
-    req.on('end',function(){
-        var content;
-        crypto.randomBytes(2,function(ex,buf){
-            var token = buf.toString('hex');
-            req.session.emailCode = token;
-            sendEmail(post,"email code for teaching in china",token);
-            res.end();
-        });
+    var obj = req.body;
+    for(var i in obj){
+        post = i;
+    }
+    crypto.randomBytes(2,function(ex,buf){
+        var token = buf.toString('hex');
+        req.session.emailCode = token;
+        sendEmail(post,"email code for teaching in china",token);
+        res.end();
     });
 });
 router.post('/contactUs',function(req,res){
+    mysqlData.addContactData(req.body,req,res);
+});
+router.post('/getnewjob',function(req,res){
+    mysqlData.addJobData(req.body,req,res);
+});
+
+
+
+//后台管理中心
+
+router.route('/manage')
+    .get( function(req, res) {
+        if(req.session.manageUser){
+            res.redirect('/manage/user');
+        }
+        else{
+            res.render('manageLogin');
+        }
+    })
+    .post(function(req,res){
+        mysqlData.queryManageData(req.body,req,res);
+    });
+router.route('/manage/user')
+    .get( function(req, res) {
+        if(req.session.manageUser){
+            res.render("user");
+        }
+        else{
+            res.redirect("/manage");
+        }
+    })
+    .post(function(req,res){
+
+    });
+router.get("/manage/codeImg",function(req,res){
+    if(req.url == '/favicon.ico'){
+        return res.end();
+    }
+    var Img = makeCapcha();
+    req.session.manageCode = Img.str;
+    res.end(Img.getFileData());
 
 });
+router.get("/manage/logout",function(req,res){
+    delete req.session.manageUser;
+    res.redirect("/manage");
+});
+
+
 module.exports = router;
