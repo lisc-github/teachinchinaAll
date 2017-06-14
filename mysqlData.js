@@ -159,19 +159,22 @@ obj.changeData = function(data,req,res){
 
 };
 obj.formData = function(data,req,res){
-    var  sql = 'SELECT * FROM userform';
-    var addSql = 'INSERT INTO userform(firstname,middlename,lastname,nickname,birthday,' +
-        'birthmonth,birthyear,gender,email,address,city,state,country,postalcode,mobilephone,' +
-        'homephone1,homephone2,major,degree,otherDegree,programChoice,schoolChoice,userName) ' +
-        'VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+    var  sql = 'SELECT * FROM applyform';
+    var addSql;
     var arr = [];
     for(var i in data){
         arr.push(data[i]);
     }
     arr.push(req.session.user_name);
+    if(arr.length==23){
+	addSql = 'INSERT INTO applyform(firstname,middlename,lastname,nickname,birthday,birthmonth,birthyear,gender,email,address,city,state,country,postalcode,mobilephone,homephone1,homephone2,major,degree,otherDegree,programChoice,schoolChoice,username) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+    }
+    else{
+	addSql = 'INSERT INTO applyform(firstname,middlename,lastname,nickname,birthday,birthmonth,birthyear,gender,email,address,city,state,country,postalcode,mobilephone,homephone1,homephone2,major,degree,programChoice,schoolChoice,username) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+    }
     connection.query(addSql,arr,function(err,result){
         if(err){
-            console.log('[INSERT ERROR] - ',err.message);
+            console.log('[INSERT ERROR1] - ',err.message);
             return;
         }
         addMark(req.session.user_name);
@@ -221,7 +224,7 @@ obj.getFormData = function(req,res){
     for(var i in req.body){
         post = i;
     }
-    var sql = 'SELECT * FROM userform WHERE userName= ? ';
+    var sql = 'SELECT * FROM applyform WHERE userName= ? ';
     var sqlParams = [post];
     connection.query(sql,sqlParams,function(err,result){
         if(err){
@@ -233,7 +236,7 @@ obj.getFormData = function(req,res){
     })
 };
 obj.addContactData = function(data,req,res){
-    var addSql = 'INSERT INTO contactus(date,firstname,lastname,email,phonenumber,interestarea,location,comments) VALUES (?,?,?,?,?,?,?,?)';
+    var addSql = 'INSERT INTO contact(date,firstname,lastname,email,phonenumber,interestarea,location,comments) VALUES (?,?,?,?,?,?,?,?)';
     var arr=[];
     for(var i in data){
         arr.push(data[i]);
@@ -251,7 +254,7 @@ obj.addContactData = function(data,req,res){
 };
 
 obj.addJobData = function(data,req,res){
-    var addSql = 'INSERT INTO getnewjob(date,email) VALUES (?,?)';
+    var addSql = 'INSERT INTO getjobinfo(date,email) VALUES (?,?)';
     var arr=[];
     arr.push(data.email);
     var nowDate = new Date();
@@ -267,7 +270,7 @@ obj.addJobData = function(data,req,res){
 };
 obj.getContactData = function(req,res){
 
-    var sql = 'SELECT * FROM contactus';
+    var sql = 'SELECT * FROM contact';
     connection.query(sql,function(err,result){
         if(err){
             console.log(err.stack);
@@ -279,7 +282,7 @@ obj.getContactData = function(req,res){
 };
 obj.getJobData = function(req,res){
 
-    var sql = 'SELECT * FROM getnewjob';
+    var sql = 'SELECT * FROM getjobinfo';
     connection.query(sql,function(err,result){
         if(err){
             console.log(err.stack);
@@ -292,7 +295,7 @@ obj.getJobData = function(req,res){
 
 //后台管理中心
 obj.queryManageData = function(data,req,res){
-    var sql = "SELECT * FROM admininfo";
+    var sql = "SELECT * FROM admin";
     connection.query(sql,function(err,result){
         if(err){
             return;

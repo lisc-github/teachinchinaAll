@@ -4,11 +4,12 @@
 module.exports = {
     //邮件配置
     email: {
-        host: 'smtp.uschinaedu.cn',
-        port: 25,
+        host: 'smtp.163.com',
+	secureConnection:true,
+        port: 465,
         auth: {
-            user: 'uce12@uschinaedu.cn',
-            pass: 'LSClh2016'
+            user: 'N_Reply@163.com',
+            pass: 'hzmzwl666666'
         }
     }
 };
